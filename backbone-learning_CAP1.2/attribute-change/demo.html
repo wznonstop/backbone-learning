@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>demo</title>
+	<meta charset = "utf-8">
+</head>
+<body>
+	<script type="text/javascript" src="http://the5fireblog.b0.upaiyun.com/staticfile/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="http://the5fireblog.b0.upaiyun.com/staticfile/underscore.js"></script>
+	<script type="text/javascript" src="http://the5fireblog.b0.upaiyun.com/staticfile/backbone.js"></script>
+	<script>
+		(function($){
+			var Man = Backbone.Model.extend({
+				initialize: function(){
+					alert('Hey, you create me!');
+					//初始化时绑定监听
+					this.bind("change:name", function(){
+						var name = this.get("name");
+						alert("你改变了name属性为：" + name);
+					})
+				},
+				defaults: {
+					name: '小白',
+					age: '3'
+				},
+				aboutMe: function(){
+					return '我包子叫' + this.get('name') + '，今年' + this.get('age') + '岁';
+				}
+			});
+			var man = new Man;
+			man.set({name: '小小白'})	 //触发绑定的change事件，alert
+			man.set({name: '3岁小白'})	//触发绑定的change事件，alert
+		})(jQuery);
+	</script>
+</body>
+</html>

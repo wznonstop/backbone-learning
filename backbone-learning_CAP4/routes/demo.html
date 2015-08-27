@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>demo</title>
+	<meta charset = "utf-8">
+</head>
+<body>
+	<!-- 点击该链接时，便会触发defaultRouter这个方法 -->
+	<a href="#act">testActions</a>
+	<script type="text/javascript" src="http://the5fireblog.b0.upaiyun.com/staticfile/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="http://the5fireblog.b0.upaiyun.com/staticfile/underscore.js"></script>
+	<script type="text/javascript" src="http://the5fireblog.b0.upaiyun.com/staticfile/backbone.js"></script>
+	<script>
+		(function($){
+			var AppRouter = Backbone.Router.extend({
+				routes: {
+					"*act": "defaultRoute"
+				},
+
+				defaultRoute: function(actions){
+					alert(actions);
+				}
+			});
+
+			var app_router = new AppRouter;
+			//需要通过调用Backbone.history.start()方法来初始化这个Router
+			Backbone.history.start();
+		})(jQuery);
+	</script>
+	
+
+</body>
+</html>

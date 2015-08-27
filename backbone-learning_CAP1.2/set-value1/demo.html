@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>demo</title>
+	<meta charset = "utf-8">
+</head>
+<body>
+	<script type="text/javascript" src="http://the5fireblog.b0.upaiyun.com/staticfile/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="http://the5fireblog.b0.upaiyun.com/staticfile/underscore.js"></script>
+	<script type="text/javascript" src="http://the5fireblog.b0.upaiyun.com/staticfile/backbone.js"></script>
+	<script>
+		(function($){
+			var Man = Backbone.Model.extend({
+				//初始化的函数，每次new的时候都会执行
+				initialize: function(){
+					alert('Hey, you create me!');
+				},
+				defaults: {
+					name: '张三',
+					age: '38'
+				}
+			});
+			var man = new Man;
+			alert(man.get('name'));
+			//由于每次初始化都会执行上方注释下的初始化函数，因此又会蹦出一个弹出框
+			var haman = new Man;
+		})(jQuery);
+	</script>
+</body>
+</html>

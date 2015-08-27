@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>demo</title>
+	<meta charset = "utf-8">
+</head>
+<body>
+	<script type="text/javascript" src="http://the5fireblog.b0.upaiyun.com/staticfile/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="http://the5fireblog.b0.upaiyun.com/staticfile/underscore.js"></script>
+	<script type="text/javascript" src="http://the5fireblog.b0.upaiyun.com/staticfile/backbone.js"></script>
+	<script>
+		(function($){
+			var Man = Backbone.Model.extend({
+				initialize: function(){
+					alert('Hey, you create me!');
+					//初始化时绑定监听,change事件会先于validate发生
+					this.bind("change:name", function(){
+						var name = this.get("name");
+						alert("你改变了name属性为：" + name);
+					});
+					this.bind("invalid", function(model,error){
+						alert(error);
+					});
+				},
+				defaults: {
+					name: '小白',
+					age: '3'
+				},
+				validate: function(attributes){
+					if (attributes.name == '') {
+						return "name不能为空！"
+					}
+				},
+				aboutMe: function(){
+					return '我包子叫' + this.get('name') + '，今年' + this.get('age') + '岁';
+				}
+			});
+			var man = new Man;
+			//可用这种方式添加错误处理
+			// man.on('invalid', function(model, error){
+			// 	alert(error);
+			// });
+
+			man.set({name: ''})	 //默认set时不进行验证
+			// man.set({name: ''}, {'validate':true});		//手动触发验证，set时会触发
+			man.save();		//save时触发验证。根据验证规则，弹出错误提示
+		})(jQuery);
+	</script>
+</body>
+</html>
